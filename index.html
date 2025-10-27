@@ -1,45 +1,50 @@
-  <div class="lang-switch" id="langSwitch">
-    <button data-lang="az" class="lang active">AZ</button>
-    <button data-lang="en" class="lang">EN</button>
-    <button data-lang="ru" class="lang">RU</button>
-  </div>
-
-  <h1 class="title" id="mainTitle">QAR6 MUSIC GROUP</h1>
-
-  <div class="panel" id="sidePanel" aria-hidden="true">
-    <button id="songsBtn">Mahnılar</button>
-    <button id="aboutBtn">Haqqımızda</button>
-    <div class="categories" id="categories">
-      <div class="cat-item" data-cat="Sevgi">Sevgi</div>
-      <div class="cat-item" data-cat="Ümumi">Ümumi</div>
-      <div class="cat-item" data-cat="Başqa dillərdə">Başqa dillərdə</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <script src="scripts.js" defer></script>
+  <title>QAR6 MUSIC GROUP</title>
+</head>
+<body>
+  <header class="header">
+    <!-- Language switcher -->
+    <div class="language-switcher">
+      <button data-language="en">EN</button>
+      <button data-language="ru">RU</button>
     </div>
-  </div>
-</section>
 
-<div class="separator" aria-hidden="true">
-  <div class="sep-line"></div>
-</div>
+    <!-- Main title -->
+    <h1 class="title">QAR6 MUSIC GROUP</h1>
 
-<section class="library" id="section-bottom">
-  <div class="subscribe" id="subscribeText">Yeni musiqilərimiz üçün yuotube kanalımıza abone olub videolarımızı bəyənməyi və şərh yazmağı unutmayın</div>
-  <div class="yt-row">
-    <a href="https://youtube.com/@qar6musicgroup?si=YMUzMQBJMvDhVrOC" target="_blank" rel="noopener noreferrer">
-      <span class="yt-icon">▶</span>
-      <span id="ytName">QAR6 MUSIC GROUP</span>
-    </a>
-  </div>
+    <!-- Buttons for music categories -->
+    <div class="categories-panel">
+      <button data-category="love">Sevgi</button>
+      <button data-category="general">Ümumi</button>
+      <button data-category="other">Başqa dillərdə</button>
+    </div>
+  </header>
 
-  <div class="library-header">
-    <button class="search-btn" id="searchOpen">Axtar</button>
-    <input class="search-input" id="searchInput" placeholder="Mahnı adı axtar..." />
-  </div>
+  <main class="main">
+    <!-- YouTube videos -->
+    <section class="videos">
+      <!-- YouTube video elements will be inserted here by JavaScript -->
+    </section>
 
-  <div class="songs" id="songsList">
-    <!-- songs injected by JS -->
-  </div>
-</section>
+    <!-- Search bar -->
+    <div class="search">
+      <input type="text" placeholder="Axtar...">
+      <button>Axtar</button>
+    </div>
+  </main>
 
-<footer id="legal">
-  © QAR6 MUSIC GROUP — Bütün hüquqlar qorunur. Saytın qanuniliyi təsdiq olunur. Yaradılma ili: 2025.
-</footer>
+  <!-- Footer -->
+  <footer class="footer">
+    <p>Yeni musiqilərimiz üçün yuotube kanalımıza abone olub videolarımızı bəyənməyi və şərh yazmağı unutmayın.</p>
+    <a href="https://youtube.com/@qar6musicgroup?si=YMUzMQBJMvDhVrOC" target="_blank">QAR6 MUSIC GROUP <i class="fab fa-youtube"></i></a>
+    <p>© QAR6 MUSIC GROUP - Bütün hüquqlar qorunur. Saytın qanuniliyi təsdiq olunur. Yaradılma ili: 2023.</p>
+  </footer>
+  
+</body>
+</html>
