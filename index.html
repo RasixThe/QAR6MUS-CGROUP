@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="az">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>QAR6 Music Production</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="wrap">
+      <div class="brand">
+        <h1>QAR6<span> Music Production</span></h1>
+        <p class="sub">Modern beats. Deep feelings. Share & download.</p>
+      </div>
+      <nav class="nav">
+        <a href="#tracks">Mahnılar</a>
+        <a href="#about">Haqqında</a>
+        <a href="#contact">Əlaqə</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap main">
+    <section id="hero" class="hero card">
+      <div class="hero-left">
+        <h2>Yeni səslər, səninlə</h2>
+        <p>QAR6 Music Production — şəxsi mahnılarımı dinlə və yüklə. Yeni yayımlar üçün repo-ya bax.</p>
+        <div class="cta">
+          <a id="youtubeBtn" class="btn" href="https://youtube.com/yourchannel" target="_blank" rel="noopener">YouTube Kanalına keç</a>
+        </div>
+      </div>
+      <div class="hero-right">
+        <img src="assets/cover-placeholder.png" alt="cover" class="cover">
+      </div>
+    </section>
+
+    <section id="tracks" class="card">
+      <h2>Mahnılar</h2>
+      <div id="tracksList" class="tracks-list">
+        <!-- tracks injected by script.js -->
+      </div>
+      <p class="hint">Yeni mahnı əlavə etmək üçün `audio/` qovluğuna faylı yükləyin və `songs.js` faylında obyekt əlavə edin.</p>
+    </section>
+
+    <section id="about" class="card">
+      <h2>Haqqında</h2>
+      <p>QAR6 Music Production — müasir, synth-led musiqi tərzi ilə işləyən prodüser brendi. Burada şəxsi mahnılarımı paylaşır, dinləyicilərlə birbaşa əlaqə qururam.</p>
+    </section>
+
+    <section id="contact" class="card">
+      <h2>Əlaqə</h2>
+      <p>Email: <a href="mailto:you@example.com">you@example.com</a></p>
+      <p>Repo: <a href="https://github.com/username/qar6-music-production" target="_blank" rel="noopener">GitHub repo</a></p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <p>© <span id="year"></span> QAR6 Music Production — All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="songs.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
