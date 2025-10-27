@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="az">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QAR6 MUSIC GROUP - Official Website</title>
+    <title>QAR6 MUSİC GROUP - Rəsmi Sayt</title>
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Alice&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -22,66 +22,17 @@
             margin: 0;
             padding: 0;
             font-family: var(--font-alice);
-            background-color: var(--color-secondary); /* Qara arxa fon */
-            color: var(--color-text-light);
-            overflow-x: hidden; /* Səhifənin yanal sürüşməsini əngəlləmək üçün */
-        }
-
-        /* Naviqasiya Paneli (Off-Canvas Menu) */
-        .nav-panel {
-            position: fixed;
-            top: 0;
-            right: 0;
-            width: 300px;
-            height: 100%;
             background-color: var(--color-secondary);
-            z-index: 1000;
-            transform: translateX(100%); /* Başlanğıcda kənarda */
-            transition: transform 0.4s ease-in-out;
-            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
-            padding-top: 60px; /* Header-in üstündən gəlməsi üçün */
-        }
-        .nav-panel.open {
-            transform: translateX(0); /* Açılarkən yerinə gəlir */
-        }
-
-        .nav-item {
-            display: block;
-            padding: 15px 20px;
             color: var(--color-text-light);
-            text-decoration: none;
-            font-size: 1.3rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            transition: background-color 0.3s, color 0.3s;
+            overflow-x: hidden;
+            scroll-behavior: smooth; /* Hamar sürüşmə */
         }
 
-        .nav-item:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-            color: var(--color-primary);
-        }
-
-        .submenu {
-            padding-left: 20px;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease-out;
-            background-color: rgba(255, 255, 255, 0.05);
-        }
-
-        .submenu.open {
-            max-height: 300px; /* Təxmini hündürlük */
-        }
-
-        .submenu a {
-            padding: 10px 0;
-            font-size: 1.1rem;
-        }
-
-        /* Dil Dəyişmə */
+        /* ------------------- DİL DƏYİŞMƏ ------------------- */
         .language-switcher {
             position: absolute;
             top: 20px;
-            right: 80px; /* Menyu düyməsinə yer qoymaq üçün */
+            right: 80px;
             z-index: 1010;
         }
         .lang-btn {
@@ -97,27 +48,6 @@
         .lang-btn:hover {
             background-color: var(--color-primary);
             border-color: var(--color-primary);
-        }
-
-        /* ------------------- BİRİNCİ BÖLMƏ (Header) ------------------- */
-        .section-one {
-            background-color: var(--color-primary);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-
-        .main-title {
-            font-family: var(--font-anton);
-            font-size: 10vw; /* Adaptiv ölçü */
-            color: var(--color-text-light);
-            text-shadow: -15px -15px 5px rgba(0, 0, 0, 0.4);
-            letter-spacing: 5px;
-            text-align: center;
-            padding: 0 10px;
         }
 
         /* Hamburger Menyu Butonu */
@@ -136,16 +66,115 @@
             flex-direction: column;
             justify-content: space-around;
             z-index: 1010;
-            transition: transform 0.3s;
         }
         .menu-button span {
             display: block;
             height: 4px;
             background-color: var(--color-primary);
             border-radius: 2px;
+            transition: transform 0.3s, opacity 0.3s;
+        }
+        /* Menyu açılarkən ikonun dəyişməsi */
+        .menu-button.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+        .menu-button.active span:nth-child(2) { opacity: 0; }
+        .menu-button.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+
+        /* ------------------- BİRİNCİ BÖLMƏ (Baş Səhifə) ------------------- */
+        .section-one {
+            background-color: var(--color-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            /* Musiqi notaları effektini tətbiq etmək üçün pseudo-element */
         }
 
-        /* ------------------- AYIRICI XƏTT VƏ ABUNƏLİK ------------------- */
+        .section-one::before {
+            content: '🎶 🎼 🎵 🎧'; /* Notalar və ikonlar */
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            font-size: 8em; /* Böyük notalar */
+            line-height: 1.5;
+            color: rgba(255, 255, 255, 0.1); /* Çox şəffaf ağ rəng */
+            pointer-events: none; /* Kliklərin qarşısını almaq */
+            white-space: pre-wrap;
+            opacity: 0.8;
+            background: repeating-linear-gradient(
+                45deg,
+                rgba(255, 255, 255, 0.05),
+                rgba(255, 255, 255, 0.05) 10px,
+                transparent 10px,
+                transparent 20px
+            ); /* Yüngül zolaqlar */
+            z-index: 1; /* Başlığın altında qalması üçün */
+            overflow: hidden;
+        }
+
+        .main-title {
+            font-family: var(--font-anton);
+            font-size: 10vw;
+            color: var(--color-text-light);
+            text-shadow: -15px -15px 5px rgba(0, 0, 0, 0.4);
+            letter-spacing: 5px;
+            text-align: center;
+            padding: 0 10px;
+            position: relative; /* Notaların üstündə qalması üçün */
+            z-index: 2;
+        }
+
+        /* ------------------- NAVİQASİYA PANELI (Qara Pano) ------------------- */
+        .nav-panel {
+            position: fixed;
+            top: 0;
+            left: -300px; /* Sola gizlədilir (daha müasir yanaşma) */
+            width: 300px;
+            height: 100%;
+            background-color: var(--color-secondary);
+            z-index: 1000;
+            transition: left 0.4s ease-in-out;
+            box-shadow: 5px 0 15px rgba(0, 0, 0, 0.5);
+            padding-top: 60px;
+        }
+        .nav-panel.open {
+            left: 0;
+        }
+
+        .nav-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            color: var(--color-text-light);
+            text-decoration: none;
+            font-size: 1.2rem; /* Orta ölçü */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: background-color 0.3s, color 0.3s;
+            font-family: var(--font-alice);
+        }
+        .nav-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--color-primary);
+        }
+
+        .submenu {
+            padding-left: 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out;
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .submenu.open {
+            max-height: 300px;
+        }
+
+        /* ------------------- İKİNCİ BÖLMƏ (Mahnılar) ------------------- */
         .divider-container {
             padding: 30px 20px;
             background-color: var(--color-secondary);
@@ -155,9 +184,8 @@
         .divider {
             height: 3px;
             background-color: var(--color-primary);
-            margin: 20px 0;
             width: 80%;
-            max-width: 600px;
+            max-width: 800px;
             margin: 20px auto;
         }
 
@@ -177,22 +205,14 @@
             font-size: 1.2rem;
             transition: background-color 0.3s, transform 0.3s;
         }
-        .youtube-link:hover {
-            background-color: #cc0000;
-            transform: scale(1.05);
-        }
 
-        /* ------------------- İKİNCİ BÖLMƏ (Mahnılar) ------------------- */
         .section-two {
             background-color: var(--color-secondary);
             padding: 60px 20px;
             position: relative;
         }
 
-        /* Axtarış Sahəsi */
         .search-area {
-            display: flex;
-            justify-content: flex-start;
             margin-bottom: 40px;
         }
 
@@ -205,21 +225,10 @@
             cursor: pointer;
             font-size: 1.2rem;
             font-family: var(--font-alice);
-            transition: background-color 0.3s, transform 0.3s;
             display: flex;
             align-items: center;
         }
 
-        .search-button i {
-            margin-right: 10px;
-        }
-
-        .search-button:hover {
-            background-color: #ddd;
-            transform: translateY(-2px);
-        }
-
-        /* Mahnı Siyahısı */
         .track-list {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -232,12 +241,7 @@
             background-color: rgba(255, 255, 255, 0.05);
             padding: 15px;
             border-radius: 10px;
-            transition: background-color 0.3s;
             border-left: 3px solid var(--color-primary);
-        }
-
-        .track-item:hover {
-            background-color: rgba(255, 255, 255, 0.1);
         }
 
         .track-image {
@@ -247,26 +251,18 @@
             margin-right: 15px;
             background-color: #555;
             flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
         }
-        .track-image i {
-            font-size: 40px;
-            line-height: 80px;
-            text-align: center;
-            display: block;
-        }
-
+        
         .track-details h4 {
             margin: 0;
             font-size: 1.2rem;
-            color: var(--color-text-light);
             font-family: var(--font-alice);
         }
-        .track-details p {
-            margin: 5px 0 0 0;
-            font-size: 0.9rem;
-            color: #ccc;
-        }
-
+        
         .track-actions {
             margin-left: auto;
             display: flex;
@@ -281,12 +277,6 @@
             cursor: pointer;
             border-radius: 5px;
             font-family: var(--font-alice);
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        .track-actions button:hover {
-            background-color: var(--color-primary);
-            color: var(--color-text-light);
         }
 
         /* ------------------- FOOTER ------------------- */
@@ -298,15 +288,11 @@
             font-size: 0.9rem;
             color: #777;
         }
-        .footer p {
-            margin: 5px 0;
-        }
 
         /* Mobil Adaptasiya */
         @media (max-width: 600px) {
             .main-title {
                 font-size: 15vw;
-                line-height: 1.1;
             }
             .track-list {
                 grid-template-columns: 1fr;
@@ -314,18 +300,9 @@
             .track-item {
                 flex-direction: column;
                 text-align: center;
-                gap: 10px;
-            }
-            .track-image, .track-details, .track-actions {
-                width: 100%;
-                margin: 0;
-            }
-            .track-actions {
-                justify-content: center;
             }
             .search-button {
                 width: 100%;
-                justify-content: center;
             }
         }
     </style>
@@ -333,13 +310,13 @@
 <body>
 
     <nav class="nav-panel" id="navPanel">
-        <a href="#" class="nav-item" id="songsLink">Songs <i class="fas fa-caret-down"></i></a>
+        <a href="#" class="nav-item" id="songsLink">Mahnılar <i class="fas fa-caret-down"></i></a>
         <div class="submenu" id="songsSubmenu">
-            <a href="#general-songs" class="nav-item">General</a>
-            <a href="#love-songs" class="nav-item">Love</a>
-            <a href="#other-language-songs" class="nav-item">Other Languages</a>
+            <a href="#general-songs" class="nav-item">Ümumi</a>
+            <a href="#love-songs" class="nav-item">Sevgi</a>
+            <a href="#other-language-songs" class="nav-item">Başqa Dillərdə</a>
         </div>
-        <a href="#about-us" class="nav-item">About Us</a>
+        <a href="#about-us" class="nav-item">Haqqımızda</a>
     </nav>
 
     <div class="language-switcher">
@@ -354,92 +331,97 @@
     </div>
 
     <section class="section-one">
-        <h1 class="main-title">QAR6 MUSIC GROUP</h1>
+        <h1 class="main-title">QAR6 MUSİC GROUP</h1>
     </section>
 
     <div class="divider-container">
         <div class="divider"></div>
-        <p class="subscription-info">Don't forget to subscribe to our YouTube channel, like our videos, and write comments for our new music!</p>
+        <p class="subscription-info">Yeni musiqilərimiz üçün Youtube kanalımıza abunə olub, videolarımızı bəyənməyi və şərh yazmağı unutmayın!</p>
 
         <a href="https://youtube.com/@qar6musicgroup?si=YMUzMQBJMvDhVrOC" target="_blank" class="youtube-link">
-             <i class="fab fa-youtube"></i> Subscribe Now
+             <i class="fab fa-youtube"></i> QAR6 MUSİC GROUP
         </a>
     </div>
 
     <section class="section-two">
         <div class="search-area">
             <button class="search-button" id="searchButton">
-                <i class="fas fa-search"></i> Search Tracks
+                <i class="fas fa-search"></i> Axtarış
             </button>
         </div>
 
         <div class="track-list">
-            <div class="track-item" id="general-songs">
-                <div class="track-image">
-                    <i class="fas fa-compact-disc" style="color: white;"></i>
-                </div>
+            
+            <div class="track-item" id="general-songs-track1">
+                <div class="track-image" style="background-color: #0088cc;"><i class="fas fa-compact-disc"></i></div>
                 <div class="track-details">
-                    <h4>The Power of Sound</h4>
-                    <p>General Track | 2024 Single</p>
+                    <h4>Nümunə Mahnı Adı 1</h4>
+                    <p>Ümumi | 2024</p>
                 </div>
                 <div class="track-actions">
-                    <button>Listen</button>
-                    <button>Download</button>
+                    <button>Dinlə</button>
+                    <button>Endir</button>
                 </div>
             </div>
 
-            <div class="track-item" id="love-songs">
-                <div class="track-image">
-                    <i class="fas fa-heart" style="color: var(--color-primary);"></i>
-                </div>
+            <div class="track-item" id="love-songs-track1">
+                <div class="track-image" style="background-color: #cc0000;"><i class="fas fa-heart"></i></div>
                 <div class="track-details">
-                    <h4>Silent Melody of Love</h4>
-                    <p>Love Track | Album 1</p>
+                    <h4>Sevgi Nəğməsi</h4>
+                    <p>Sevgi | 2023</p>
                 </div>
                 <div class="track-actions">
-                    <button>Listen</button>
-                    <button>Download</button>
+                    <button>Dinlə</button>
+                    <button>Endir</button>
                 </div>
             </div>
 
-            <div class="track-item" id="other-language-songs">
-                <div class="track-image">
-                    <i class="fas fa-globe" style="color: white;"></i>
-                </div>
+            <div class="track-item" id="other-language-songs-track1">
+                <div class="track-image" style="background-color: #00cc88;"><i class="fas fa-globe"></i></div>
                 <div class="track-details">
-                    <h4>Rhythm of the World (French)</h4>
-                    <p>International | 2023</p>
+                    <h4>Foreign Title (Tərcümə)</h4>
+                    <p>Başqa Dillərdə | 2022</p>
                 </div>
                 <div class="track-actions">
-                    <button>Listen</button>
-                    <button>Download</button>
+                    <button>Dinlə</button>
+                    <button>Endir</button>
                 </div>
             </div>
-
+            
             </div>
     </section>
 
     <footer class="footer">
-        <p>Legal Notice: This site is protected by law. &copy; 2024 QAR6 MUSIC GROUP. All rights reserved.</p>
-        <p>Created: 2024.</p>
+        <p>Saytın qanuniliyinin təsdiqi və hüquqi qorunması. &copy; 2024 QAR6 MUSİC GROUP. Bütün hüquqlar qorunur.</p>
+        <p>Yaradılma ili: 2024.</p>
     </footer>
 
     <script>
+        const menuButton = document.getElementById('menuButton');
+        const navPanel = document.getElementById('navPanel');
+        const songsLink = document.getElementById('songsLink');
+        const songsSubmenu = document.getElementById('songsSubmenu');
+
         // Hamburger Menyu Funksiyası
-        document.getElementById('menuButton').addEventListener('click', function() {
-            document.getElementById('navPanel').classList.toggle('open');
-            document.body.style.overflow = document.getElementById('navPanel').classList.contains('open') ? 'hidden' : 'auto';
+        menuButton.addEventListener('click', function() {
+            navPanel.classList.toggle('open');
+            menuButton.classList.toggle('active');
+            // Menyu açıq olanda səhifə sürüşməsinin qarşısını alır
+            document.body.style.overflow = navPanel.classList.contains('open') ? 'hidden' : 'auto';
         });
 
         // Mahnılar Alt-Menyu Funksiyası
-        document.getElementById('songsLink').addEventListener('click', function(e) {
-            e.preventDefault();
-            document.getElementById('songsSubmenu').classList.toggle('open');
+        songsLink.addEventListener('click', function(e) {
+            // Səhifə yenilənməsinin qarşısını alır
+            if (e.target === songsLink || e.target.closest('#songsLink')) {
+                e.preventDefault();
+                songsSubmenu.classList.toggle('open');
+            }
         });
 
         // Axtarış Butonu Funksiyası
         document.getElementById('searchButton').addEventListener('click', function() {
-            alert("Axtarış funksiyası (səhifədəki mahnıları tapmaq üçün) burada aktivləşdiriləcək. Məsələn, bir axtarış pəncərəsi açılacaq.");
+            alert("Axtarış funksiyası aktivdir! Buradan səhifədə adı keçən mahnıları tapmaq mümkün olacaq.");
         });
     </script>
 
