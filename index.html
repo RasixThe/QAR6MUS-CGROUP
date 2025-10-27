@@ -3,48 +3,329 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css">
-  <script src="scripts.js" defer></script>
   <title>QAR6 MUSIC GROUP</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Alice&display=swap" rel="stylesheet">
+  <!-- Font Awesome for YouTube icon -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Alice', serif;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    /* Section 1 */
+    #section1 {
+      background-color: #800020; /* burgundy red */
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      text-align: center;
+    }
+
+    /* Language Switcher */
+    .language-switch {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      gap: 10px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .language-switch span:hover {
+      text-decoration: underline;
+    }
+
+    /* Title */
+    .title {
+      font-family: 'Anton', sans-serif;
+      font-size: 64px;
+      margin-bottom: 40px;
+    }
+
+    /* Hamburger Menu */
+    .hamburger {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      width: 30px;
+      height: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      cursor: pointer;
+    }
+
+    .hamburger div {
+      height: 4px;
+      background-color: white;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    /* Panel */
+    .menu-panel {
+      position: fixed;
+      top: 0;
+      left: -300px;
+      width: 300px;
+      height: 100%;
+      background-color: black;
+      padding: 50px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      transition: 0.3s;
+      z-index: 10;
+    }
+
+    .menu-panel.active {
+      left: 0;
+    }
+
+    .menu-panel button {
+      background: none;
+      border: none;
+      color: white;
+      font-family: 'Alice', serif;
+      font-size: 18px;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .categories {
+      margin-left: 15px;
+      display: none;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .categories button {
+      font-size: 16px;
+      color: white;
+    }
+
+    /* Section 2 */
+    #section2 {
+      background-color: black;
+      padding: 50px 20px;
+      position: relative;
+    }
+
+    hr {
+      border: 0;
+      border-top: 1px solid white;
+      margin-bottom: 20px;
+    }
+
+    .youtube-section {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .youtube-section a {
+      color: white;
+      font-size: 40px;
+      margin-top: 10px;
+      display: inline-block;
+      transition: transform 0.3s;
+    }
+
+    .youtube-section a:hover {
+      transform: scale(1.2);
+    }
+
+    .songs-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .song-item {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      background: #111;
+      padding: 15px;
+      border-radius: 8px;
+    }
+
+    .song-item img {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+
+    .song-details {
+      flex: 1;
+    }
+
+    .song-details h3 {
+      font-family: 'Alice', serif;
+      font-size: 18px;
+      margin-bottom: 5px;
+    }
+
+    .song-buttons button {
+      margin-right: 10px;
+      padding: 5px 10px;
+      font-family: 'Alice', serif;
+      background: none;
+      border: 1px solid white;
+      color: white;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: 0.3s;
+    }
+
+    .song-buttons button:hover {
+      background: white;
+      color: black;
+    }
+
+    /* Search Button */
+    .search-button {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: none;
+      border: 2px solid white;
+      padding: 10px 15px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      margin-top: 50px;
+      font-size: 14px;
+      color: #aaa;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .title {
+        font-size: 48px;
+      }
+      .menu-panel {
+        width: 80%;
+      }
+      .song-item {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .song-buttons {
+        margin-top: 10px;
+      }
+    }
+  </style>
 </head>
 <body>
-  <header class="header">
-    <!-- Language switcher -->
-    <div class="language-switcher">
-      <button data-language="en">EN</button>
-      <button data-language="ru">RU</button>
+
+  <!-- Section 1 -->
+  <section id="section1">
+    <div class="language-switch">
+      <span>EN</span> | <span>RU</span>
     </div>
 
-    <!-- Main title -->
-    <h1 class="title">QAR6 MUSIC GROUP</h1>
+    <div class="title">QAR6 MUSIC GROUP</div>
 
-    <!-- Buttons for music categories -->
-    <div class="categories-panel">
-      <button data-category="love">Sevgi</button>
-      <button data-category="general">Ümumi</button>
-      <button data-category="other">Başqa dillərdə</button>
+    <div class="hamburger" id="hamburger">
+      <div></div>
+      <div></div>
+      <div></div>
     </div>
-  </header>
 
-  <main class="main">
-    <!-- YouTube videos -->
-    <section class="videos">
-      <!-- YouTube video elements will be inserted here by JavaScript -->
-    </section>
-
-    <!-- Search bar -->
-    <div class="search">
-      <input type="text" placeholder="Axtar...">
-      <button>Axtar</button>
+    <div class="menu-panel" id="menuPanel">
+      <button id="songsBtn">Songs</button>
+      <div class="categories" id="songsCategories">
+        <button>Love</button>
+        <button>General</button>
+        <button>In Other Languages</button>
+      </div>
+      <button>About Us</button>
     </div>
-  </main>
+  </section>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <p>Yeni musiqilərimiz üçün yuotube kanalımıza abone olub videolarımızı bəyənməyi və şərh yazmağı unutmayın.</p>
-    <a href="https://youtube.com/@qar6musicgroup?si=YMUzMQBJMvDhVrOC" target="_blank">QAR6 MUSIC GROUP <i class="fab fa-youtube"></i></a>
-    <p>© QAR6 MUSIC GROUP - Bütün hüquqlar qorunur. Saytın qanuniliyi təsdiq olunur. Yaradılma ili: 2023.</p>
-  </footer>
-  
+  <!-- Section 2 -->
+  <section id="section2">
+    <hr>
+    <div class="youtube-section">
+      <p>For our new songs, subscribe to our YouTube channel, like our videos, and leave a comment.</p>
+      <a href="https://youtube.com/@qar6musicgroup?si=YMUzMQBJMvDhVrOC" target="_blank"><i class="fab fa-youtube"></i></a>
+    </div>
+
+    <button class="search-button">Search</button>
+
+    <div class="songs-list">
+      <div class="song-item">
+        <img src="https://via.placeholder.com/60" alt="Song Image">
+        <div class="song-details">
+          <h3>Song Title 1</h3>
+        </div>
+        <div class="song-buttons">
+          <button>Listen</button>
+          <button>Download</button>
+        </div>
+      </div>
+      <div class="song-item">
+        <img src="https://via.placeholder.com/60" alt="Song Image">
+        <div class="song-details">
+          <h3>Song Title 2</h3>
+        </div>
+        <div class="song-buttons">
+          <button>Listen</button>
+          <button>Download</button>
+        </div>
+      </div>
+      <div class="song-item">
+        <img src="https://via.placeholder.com/60" alt="Song Image">
+        <div class="song-details">
+          <h3>Song Title 3</h3>
+        </div>
+        <div class="song-buttons">
+          <button>Listen</button>
+          <button>Download</button>
+        </div>
+      </div>
+      <!-- Add more songs here -->
+    </div>
+
+    <footer>
+      © 2025 QAR6 MUSIC GROUP. All rights reserved. Legal protection applies.
+    </footer>
+  </section>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const menuPanel = document.getElementById('menuPanel');
+    const songsBtn = document.getElementById('songsBtn');
+    const songsCategories = document.getElementById('songsCategories');
+
+    hamburger.addEventListener('click', () => {
+      menuPanel.classList.toggle('active');
+    });
+
+    songsBtn.addEventListener('click', () => {
+      songsCategories.style.display = songsCategories.style.display === 'flex' ? 'none' : 'flex';
+    });
+  </script>
+
 </body>
 </html>
