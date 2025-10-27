@@ -1,262 +1,589 @@
 <!DOCTYPE html>
 <html lang="az">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>QAR6 Music</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>QAR6 Music Group — Musiqi Saytı</title>
+
+  <!-- Anton font for headings -->
   <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Anton', sans-serif; }
-    body { color: white; }
-
-    /* Baş səhifə */
-    .section1 {
-      background: url('background.jpg') no-repeat center center/cover;
-      height: 100vh;
-      position: relative;
+    :root{
+      --bg-burgundy: #7b1620;
+      --black: #000;
+      --white: #fff;
+      --accent: #f2f2f2;
+      --line-color: #333;
+      --panel-bg: rgba(0,0,0,0.95);
+      --btn-bg: #111;
+      --btn-hover: #333;
+      --gap: 16px;
     }
 
-    /* Dil dəyişmə */
-    .language {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      background: rgba(255,255,255,0.8);
-      padding: 5px 10px;
-      border-radius: 5px;
-      color: black;
-      cursor: pointer;
+    /* Reset */
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      font-family: Inter, system-ui, Arial, sans-serif;
+      background: var(--white);
+      color: var(--white);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
     }
 
-    /* Hamburger menu */
-    .hamburger {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      width: 30px;
-      height: 3px;
-      background: black;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-    .hamburger::before, .hamburger::after {
-      content: "";
-      position: absolute;
-      width: 30px;
-      height: 3px;
-      background: black;
-      transition: 0.3s;
-    }
-    .hamburger::before { top: -10px; }
-    .hamburger::after { top: 10px; }
-
-    /* Meno paneli */
-    .menu-panel {
-      position: fixed;
-      top: 0;
-      left: -250px;
-      width: 250px;
-      height: 100%;
-      background: white;
-      color: black;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      transition: 0.3s;
-      z-index: 10;
-    }
-    .menu-panel a {
-      text-decoration: none;
-      color: black;
-      font-size: 20px;
-      margin: 20px 0;
+    /* Container holds both sections */
+    .container{
+      display:flex;
+      flex-direction:column;
+      min-height:100vh;
     }
 
-    /* İkinci bölmə */
-    .section2 {
-      background: black;
-      padding: 50px 20px;
-      position: relative;
+    /* Header (first section) */
+    .hero{
+      background: var(--bg-burgundy);
+      padding: 28px 20px;
+      position:relative;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-height:220px;
     }
 
-    /* Bölmələr arasındakı xətt */
-    .divider {
-      border-top: 2px solid white;
-      text-align: center;
-      margin: 20px 0;
-      padding-top: 10px;
-      font-size: 14px;
-      color: white;
+    /* Top-left hamburger */
+    .hamburger{
+      position:absolute;
+      left:20px;
+      top:20px;
+      width:48px;
+      height:40px;
+      background:transparent;
+      border:0;
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .hamburger .bar{
+      width:26px;
+      height:3px;
+      background:var(--white);
+      display:block;
+      position:relative;
+    }
+    .hamburger .bar::before,
+    .hamburger .bar::after{
+      content:"";
+      width:26px;height:3px;background:var(--white);position:absolute;left:0;
+    }
+    .hamburger .bar::before{top:-8px}
+    .hamburger .bar::after{top:8px}
+
+    /* Top-right language switcher */
+    .lang-switch{
+      position:absolute;
+      right:20px;
+      top:18px;
+      display:flex;
+      gap:8px;
+    }
+    .lang-switch button{
+      background:transparent;
+      color:var(--white);
+      border:1px solid rgba(255,255,255,0.18);
+      padding:6px 10px;
+      border-radius:6px;
+      cursor:pointer;
+      font-weight:600;
+    }
+    .lang-switch button.active{
+      background:rgba(255,255,255,0.14);
     }
 
-    /* YouTube link */
-    .youtube-link {
-      display: flex;
-      justify-content: center;
-      margin: 20px 0;
-    }
-    .youtube-link a {
-      color: white;
-      font-size: 24px;
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-    }
-    .youtube-link a img {
-      width: 40px;
-      height: 40px;
-      margin-left: 10px;
+    /* Center title / optional hero text */
+    .hero .brand{
+      text-align:center;
+      font-family: 'Anton', sans-serif;
+      font-size:36px;
+      letter-spacing:1px;
+      color:var(--white);
     }
 
-    /* Mahnılar */
-    .songs {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 20px;
+    /* Side panel opened by hamburger */
+    .side-panel{
+      position:fixed;
+      top:0;left:0;
+      height:100vh;width:320px;
+      transform:translateX(-110%);
+      transition:transform .28s ease;
+      background:var(--panel-bg);
+      color:var(--white);
+      z-index:60;
+      padding:36px 20px;
+      display:flex;
+      flex-direction:column;
+      gap:18px;
     }
-    .song {
-      background: #222;
-      padding: 10px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
+    .side-panel.open{transform:translateX(0)}
+    .side-panel h3{
+      font-size:20px;
+      font-family: 'Anton', sans-serif;
+      color:var(--white);
+      margin-bottom:6px;
     }
-    .song img {
-      width: 60px;
-      height: 60px;
-      object-fit: cover;
+    .side-panel p{font-size:15px;color:var(--white);opacity:.95}
+    .side-panel .close-btn{
+      position:absolute;right:14px;top:14px;background:transparent;border:0;color:var(--white);font-size:22px;cursor:pointer;
     }
-    .song-info {
-      flex: 1;
+    .side-panel .nav-btn{
+      display:block;
+      width:100%;
+      background:var(--btn-bg);
+      color:var(--white);
+      padding:12px 14px;
+      border-radius:10px;
+      text-align:center;
+      text-decoration:none;
+      font-weight:700;
+      border:1px solid rgba(255,255,255,0.06);
     }
-    .song-info h4 { margin-bottom: 5px; color: white; font-size: 16px; }
-    .song-buttons button {
-      background: transparent;
-      border: 1px solid white;
-      color: white;
-      padding: 5px 10px;
-      margin-right: 5px;
-      cursor: pointer;
+
+    /* Divider line between sections */
+    .divider-wrap{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:transparent;
+      padding:18px 12px;
+      position:relative;
+    }
+    .divider{
+      width:100%;
+      height:2px;
+      background:var(--line-color);
+      position:relative;
+    }
+    .divider .note{
+      position:absolute;
+      bottom:-18px;
+      left:50%;
+      transform:translateX(-50%);
+      background:transparent;
+      color:var(--white);
+      font-size:13px;
+      text-align:center;
+      max-width:90%;
+    }
+
+    /* Second section (black) */
+    .content{
+      background:var(--black);
+      padding:22px;
+      flex:1;
+      color:var(--white);
+      min-height:60vh;
+    }
+    .content-inner{
+      max-width:1100px;
+      margin:0 auto;
+      display:flex;
+      flex-direction:column;
+      gap:18px;
+    }
+
+    /* Top-left big search button */
+    .search-btn{
+      position:relative;
+      align-self:flex-start;
+      background:var(--white);
+      color:var(--black);
+      border-radius:10px;
+      padding:14px 18px;
+      font-weight:700;
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      border:0;
+      box-shadow:0 6px 18px rgba(0,0,0,0.45);
+      margin-bottom:6px;
       font-family: 'Anton', sans-serif;
     }
 
-    /* Axtarış */
-    .search-bar {
-      position: absolute;
-      top: 20px;
-      left: 20px;
+    /* Search input (hidden by default) */
+    .search-wrap{
+      margin-top:8px;
+      display:flex;
+      gap:10px;
+      align-items:center;
     }
-    .search-bar input {
-      padding: 10px;
-      font-size: 16px;
-      border-radius: 5px;
-      border: none;
-      width: 200px;
+    .search-wrap input[type="search"]{
+      flex:1;
+      padding:12px 14px;
+      border-radius:10px;
+      border:1px solid #222;
+      background:#111;
+      color:var(--white);
+      outline:none;
     }
-
-    /* Footer - qanunilik */
-    footer {
-      text-align: center;
-      margin-top: 50px;
-      font-size: 12px;
-      color: gray;
+    .search-wrap button{
+      padding:10px 14px;border-radius:8px;border:0;background:#222;color:var(--white);cursor:pointer;font-weight:700;
     }
 
+    /* YouTube notice & icon */
+    .youtube-block{
+      text-align:center;
+      margin-top:8px;
+      color:var(--white);
+      font-size:14px;
+    }
+    .youtube-block .yt-link{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      margin-top:8px;
+      text-decoration:none;
+      color:var(--white);
+      font-weight:800;
+      font-family: 'Anton', sans-serif;
+      background:#111;border-radius:10px;padding:10px 14px;
+    }
+    .youtube-block .yt-icon{
+      width:32px;height:32px;background:#ff0000;border-radius:6px;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-weight:800;
+      box-shadow:0 6px 16px rgba(255,0,0,0.18) inset;
+    }
+
+    /* Songs list grid */
+    .tracks{
+      display:grid;
+      grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+      gap:12px;
+      margin-top:8px;
+    }
+    .track{
+      display:flex;
+      gap:12px;
+      background:transparent;
+      padding:10px;
+      border-radius:10px;
+      align-items:center;
+      border:1px solid rgba(255,255,255,0.06);
+    }
+    .track .thumb{
+      width:78px;height:78px;background:#222;border-radius:8px;flex-shrink:0;display:flex;align-items:center;justify-content:center;overflow:hidden;
+    }
+    .track .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+    .track .meta{flex:1;display:flex;flex-direction:column;gap:6px}
+    .track .title{font-family:'Anton',sans-serif;font-size:16px;color:var(--white)}
+    .track .actions{display:flex;gap:8px;align-items:center}
+    .track button, .track a{
+      background:var(--btn-bg);
+      color:var(--white);
+      border:0;
+      padding:8px 10px;
+      border-radius:8px;
+      cursor:pointer;
+      font-weight:700;
+      text-decoration:none;
+      font-size:13px;
+    }
+    .track button:hover, .track a:hover{background:var(--btn-hover)}
+
+    /* Only list area at bottom (when many tracks listed) */
+    .tracks-list-only{
+      margin-top:8px;
+    }
+
+    /* Footer legal (AI confirmation) */
+    .legal{
+      margin-top:22px;
+      padding:16px;
+      border-top:1px solid rgba(255,255,255,0.04);
+      font-size:13px;
+      color:var(--white);
+      opacity:0.95;
+    }
+
+    /* Responsive */
+    @media (max-width:720px){
+      .hero .brand{font-size:28px}
+      .side-panel{width:84%}
+      .tracks{grid-template-columns:repeat(1,1fr)}
+      .hamburger{left:12px;top:12px}
+      .lang-switch{right:12px;top:12px}
+    }
   </style>
 </head>
 <body>
+  <div class="container">
+    <!-- First section / Header -->
+    <header class="hero">
+      <button class="hamburger" id="hamburger" aria-label="Menyu aç">
+        <span class="bar"></span>
+      </button>
 
-  <!-- Baş səhifə -->
-  <div class="section1">
-    <div class="language" onclick="toggleLanguage()">EN / RU</div>
-    <div class="hamburger" onclick="toggleMenu()"></div>
-    <div class="menu-panel" id="menuPanel">
-      <a href="#contact">Əlaqə</a>
-      <a href="#about">Haqqımızda</a>
-    </div>
-  </div>
+      <div class="brand">QAR6 MUSIC GROUP</div>
 
-  <!-- İkinci bölmə -->
-  <div class="section2">
-    <div class="divider">
-      Yeni musiqilərimiz üçün YouTube kanalımıza abone olub videolarımızı bəyənməyi və şərh yazmağı unutmayın
-    </div>
+      <div class="lang-switch" role="tablist" aria-label="Dil seçimi">
+        <button id="lang-az" class="active" data-lang="az">AZ</button>
+        <button id="lang-en" data-lang="en">EN</button>
+        <button id="lang-ru" data-lang="ru">RU</button>
+      </div>
+    </header>
 
-    <div class="youtube-link">
-      <a href="https://youtube.com/@qar6musicgroup?si=YMUzMQBJMvDhVrOC" target="_blank">
-        QAR6 MUSIC GROUP
-        <img src="youtube-icon.png" alt="YouTube">
-      </a>
-    </div>
+    <!-- Side panel triggered by hamburger -->
+    <aside class="side-panel" id="sidePanel" aria-hidden="true">
+      <button class="close-btn" id="panelClose" aria-label="Bağla">✕</button>
+      <h3>Əlaqə</h3>
+      <p>
+        Bizimlə əlaqə üçün e-poçt: <strong>contact@qar6music.group</strong> və ya telefon: <strong>+994 50 000 00 00</strong>
+      </p>
+      <a class="nav-btn" href="#haqqimizda" id="aboutLink">Haqqımızda</a>
+      <div style="height:8px"></div>
+      <h3 id="panelTitle">Menyu</h3>
+      <a class="nav-btn" href="#tracks" style="margin-top:6px">Mahnılar</a>
+    </aside>
 
-    <div class="search-bar">
-      <input type="text" id="search" placeholder="Mahnı axtar..." onkeyup="searchSongs()">
-    </div>
-
-    <div class="songs" id="songsList">
-      <!-- Mahnılar nümunəsi -->
-      <div class="song">
-        <img src="song1.jpg" alt="Mahnı 1">
-        <div class="song-info">
-          <h4>Mahnı Adı 1</h4>
-        </div>
-        <div class="song-buttons">
-          <button onclick="playSong('song1.mp3')">Dinlə</button>
-          <button onclick="downloadSong('song1.mp3')">Endir</button>
+    <!-- Divider with centered note -->
+    <div class="divider-wrap" aria-hidden="true">
+      <div class="divider"></div>
+      <div class="divider-note note" style="position:absolute;bottom:-26px;">
+        <div style="text-align:center;color:var(--white);font-size:13px">
+          Yeni musiqilərimiz üçün YouTube kanalımıza abone olub videolarımızı bəyənməyi və şərh yazmağı unutmayın
         </div>
       </div>
-
-      <div class="song">
-        <img src="song2.jpg" alt="Mahnı 2">
-        <div class="song-info">
-          <h4>Mahnı Adı 2</h4>
-        </div>
-        <div class="song-buttons">
-          <button onclick="playSong('song2.mp3')">Dinlə</button>
-          <button onclick="downloadSong('song2.mp3')">Endir</button>
-        </div>
-      </div>
-      <!-- Daha çox mahnı əlavə oluna bilər -->
     </div>
 
+    <!-- Second section / Content -->
+    <main class="content" id="tracks">
+      <div class="content-inner">
+
+        <button class="search-btn" id="searchToggle" aria-expanded="false">Axtar</button>
+
+        <div class="search-wrap" id="searchWrap" style="display:none;">
+          <input type="search" id="searchInput" placeholder="Mahnı adı yazın..." aria-label="Axtar">
+          <button id="searchClear">Təmizlə</button>
+        </div>
+
+        <div class="youtube-block">
+          <div>QAR6 MUSİC GROUP üçün rəsmi kanalımız</div>
+          <a class="yt-link" href="https://youtube.com/@qar6musicgroup?si=YMUzMQBJMvDhVrOC" target="_blank" rel="noopener noreferrer">
+            <span class="yt-icon">▶</span>
+            QAR6 MUSİC GROUP
+          </a>
+        </div>
+
+        <!-- Tracks grid -->
+        <div class="tracks" id="tracksGrid" aria-live="polite">
+          <!-- Example track items. Replace srcs with real images/audio when available. -->
+          <div class="track" data-title="Gecə Şəhəri">
+            <div class="thumb"><img src="https://via.placeholder.com/300x300.png?text=Gecə+Şəhəri" alt="Gecə Şəhəri"></div>
+            <div class="meta">
+              <div class="title">Gecə Şəhəri</div>
+              <div class="actions">
+                <button class="play-btn" data-src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">Dinlə</button>
+                <a class="download-btn" href="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" download>Endir</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="track" data-title="Sən və Mən">
+            <div class="thumb"><img src="https://via.placeholder.com/300x300.png?text=Sən+və+Mən" alt="Sən və Mən"></div>
+            <div class="meta">
+              <div class="title">Sən və Mən</div>
+              <div class="actions">
+                <button class="play-btn" data-src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3">Dinlə</button>
+                <a class="download-btn" href="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" download>Endir</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="track" data-title="Ritm və Nəfəs">
+            <div class="thumb"><img src="https://via.placeholder.com/300x300.png?text=Ritm+və+Nəfəs" alt="Ritm və Nəfəs"></div>
+            <div class="meta">
+              <div class="title">Ritm və Nəfəs</div>
+              <div class="actions">
+                <button class="play-btn" data-src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3">Dinlə</button>
+                <a class="download-btn" href="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" download>Endir</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- More sample tracks (repeatable) -->
+          <div class="track" data-title="Səssiz Sözlər">
+            <div class="thumb"><img src="https://via.placeholder.com/300x300.png?text=Səssiz+Sözlər" alt="Səssiz Sözlər"></div>
+            <div class="meta">
+              <div class="title">Səssiz Sözlər</div>
+              <div class="actions">
+                <button class="play-btn" data-src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3">Dinlə</button>
+                <a class="download-btn" href="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3" download>Endir</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="track" data-title="Yolumu Tap">
+            <div class="thumb"><img src="https://via.placeholder.com/300x300.png?text=Yolumu+Tap" alt="Yolumu Tap"></div>
+            <div class="meta">
+              <div class="title">Yolumu Tap</div>
+              <div class="actions">
+                <button class="play-btn" data-src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3">Dinlə</button>
+                <a class="download-btn" href="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3" download>Endir</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Footer legal text -->
+        <div class="legal" id="legal">
+          Bu saytın məzmununun hazırlanmasında Süni İntellekt (AI) texnologiyalarından istifadə edilmişdir. Saytın qanuniliyini təsdiq edir və müəllif hüquqları, lisenziyalar və istifadə şərtlərinə riayət edirik.
+        </div>
+
+      </div>
+    </main>
   </div>
 
-  <footer>
-    © 2025 QAR6 Music. Saytın bütün hüquqları qorunur.
-  </footer>
-
+  <!-- Minimal JS for interactions: panel, language (visual), search, play -->
   <script>
-    function toggleMenu() {
-      const panel = document.getElementById('menuPanel');
-      if(panel.style.left === '0px') {
-        panel.style.left = '-250px';
+    // Elements
+    const hamburger = document.getElementById('hamburger');
+    const sidePanel = document.getElementById('sidePanel');
+    const panelClose = document.getElementById('panelClose');
+    const langButtons = document.querySelectorAll('.lang-switch button');
+    const searchToggle = document.getElementById('searchToggle');
+    const searchWrap = document.getElementById('searchWrap');
+    const searchInput = document.getElementById('searchInput');
+    const searchClear = document.getElementById('searchClear');
+    const tracksGrid = document.getElementById('tracksGrid');
+    const playButtons = document.querySelectorAll('.play-btn');
+
+    // Toggle side panel
+    hamburger.addEventListener('click', ()=> {
+      sidePanel.classList.add('open');
+      sidePanel.setAttribute('aria-hidden','false');
+    });
+    panelClose.addEventListener('click', ()=> {
+      sidePanel.classList.remove('open');
+      sidePanel.setAttribute('aria-hidden','true');
+    });
+
+    // Language switch (visual only). Extend for real i18n.
+    langButtons.forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        langButtons.forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        // for demonstration, change some visible texts quickly
+        const lang = btn.dataset.lang;
+        if(lang === 'az'){
+          document.querySelector('.brand').textContent = 'QAR6 MUSIC GROUP';
+          document.querySelector('.youtube-block div').textContent = 'QAR6 MUSİC GROUP üçün rəsmi kanalımız';
+          document.getElementById('searchToggle').textContent = 'Axtar';
+          document.getElementById('panelTitle').textContent = 'Menyu';
+          document.getElementById('aboutLink').textContent = 'Haqqımızda';
+        } else if(lang === 'en'){
+          document.querySelector('.brand').textContent = 'QAR6 MUSIC GROUP';
+          document.querySelector('.youtube-block div').textContent = 'Official YouTube channel';
+          document.getElementById('searchToggle').textContent = 'Search';
+          document.getElementById('panelTitle').textContent = 'Menu';
+          document.getElementById('aboutLink').textContent = 'About';
+        } else if(lang === 'ru'){
+          document.querySelector('.brand').textContent = 'QAR6 MUSIC GROUP';
+          document.querySelector('.youtube-block div').textContent = 'Официальный канал на YouTube';
+          document.getElementById('searchToggle').textContent = 'Поиск';
+          document.getElementById('panelTitle').textContent = 'Меню';
+          document.getElementById('aboutLink').textContent = 'О нас';
+        }
+      });
+    });
+
+    // Search toggle
+    searchToggle.addEventListener('click', ()=>{
+      const open = searchWrap.style.display !== 'none';
+      if(open){
+        searchWrap.style.display = 'none';
+        searchToggle.setAttribute('aria-expanded','false');
       } else {
-        panel.style.left = '0px';
+        searchWrap.style.display = 'flex';
+        searchToggle.setAttribute('aria-expanded','true');
+        searchInput.focus();
+      }
+    });
+
+    // Clear search
+    searchClear.addEventListener('click', ()=>{
+      searchInput.value = '';
+      filterTracks('');
+    });
+
+    // Filter tracks by title (case-insensitive)
+    searchInput.addEventListener('input', (e)=>{
+      filterTracks(e.target.value);
+    });
+
+    function filterTracks(q){
+      const query = String(q || '').trim().toLowerCase();
+      const items = tracksGrid.querySelectorAll('.track');
+      items.forEach(item=>{
+        const title = item.dataset.title.toLowerCase();
+        const visible = title.includes(query);
+        item.style.display = visible ? 'flex' : 'none';
+      });
+    }
+
+    // Audio player (single instance)
+    let audio = new Audio();
+    let currentBtn = null;
+
+    function stopCurrent(){
+      if(!audio.paused){
+        audio.pause();
+        audio.currentTime = 0;
+      }
+      if(currentBtn){
+        currentBtn.textContent = 'Dinlə';
+        currentBtn = null;
       }
     }
 
-    function toggleLanguage() {
-      alert('Dil dəyişmə funksiyası əlavə oluna bilər.');
-    }
-
-    function playSong(file) {
-      alert(file + " səsləndiriləcək.");
-    }
-
-    function downloadSong(file) {
-      alert(file + " endiriləcək.");
-    }
-
-    function searchSongs() {
-      const input = document.getElementById('search').value.toLowerCase();
-      const songs = document.querySelectorAll('.song');
-      songs.forEach(song => {
-        const name = song.querySelector('h4').innerText.toLowerCase();
-        song.style.display = name.includes(input) ? 'flex' : 'none';
+    playButtons.forEach(btn=>{
+      btn.addEventListener('click', async ()=>{
+        const src = btn.dataset.src;
+        // If same button -> stop
+        if(currentBtn === btn){
+          stopCurrent();
+          return;
+        }
+        // Stop existing
+        stopCurrent();
+        // Start new
+        audio = new Audio(src);
+        try{
+          await audio.play();
+          btn.textContent = 'Dayandır';
+          currentBtn = btn;
+        }catch(err){
+          alert('Səs faylı çalına bilmədi. Xahiş edirik brauzer məhdudiyyətlərini yoxlayın.');
+        }
+        // When finished
+        audio.onended = ()=> {
+          if(currentBtn) currentBtn.textContent = 'Dinlə';
+          currentBtn = null;
+        }
       });
-    }
-  </script>
+    });
 
+    // Accessibility: close panel with ESC
+    window.addEventListener('keydown', (e)=>{
+      if(e.key === 'Escape'){
+        sidePanel.classList.remove('open');
+        sidePanel.setAttribute('aria-hidden','true');
+      }
+    });
+
+    // Optional: prevent accidental navigation during play by pausing audio
+    window.addEventListener('beforeunload', ()=> {
+      if(audio && !audio.paused) audio.pause();
+    });
+  </script>
 </body>
 </html>
