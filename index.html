@@ -1,72 +1,262 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="az">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>QAR6 Music Production</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QAR6 Music</title>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Anton', sans-serif; }
+    body { color: white; }
+
+    /* Baş səhifə */
+    .section1 {
+      background: url('background.jpg') no-repeat center center/cover;
+      height: 100vh;
+      position: relative;
+    }
+
+    /* Dil dəyişmə */
+    .language {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(255,255,255,0.8);
+      padding: 5px 10px;
+      border-radius: 5px;
+      color: black;
+      cursor: pointer;
+    }
+
+    /* Hamburger menu */
+    .hamburger {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      width: 30px;
+      height: 3px;
+      background: black;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .hamburger::before, .hamburger::after {
+      content: "";
+      position: absolute;
+      width: 30px;
+      height: 3px;
+      background: black;
+      transition: 0.3s;
+    }
+    .hamburger::before { top: -10px; }
+    .hamburger::after { top: 10px; }
+
+    /* Meno paneli */
+    .menu-panel {
+      position: fixed;
+      top: 0;
+      left: -250px;
+      width: 250px;
+      height: 100%;
+      background: white;
+      color: black;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transition: 0.3s;
+      z-index: 10;
+    }
+    .menu-panel a {
+      text-decoration: none;
+      color: black;
+      font-size: 20px;
+      margin: 20px 0;
+    }
+
+    /* İkinci bölmə */
+    .section2 {
+      background: black;
+      padding: 50px 20px;
+      position: relative;
+    }
+
+    /* Bölmələr arasındakı xətt */
+    .divider {
+      border-top: 2px solid white;
+      text-align: center;
+      margin: 20px 0;
+      padding-top: 10px;
+      font-size: 14px;
+      color: white;
+    }
+
+    /* YouTube link */
+    .youtube-link {
+      display: flex;
+      justify-content: center;
+      margin: 20px 0;
+    }
+    .youtube-link a {
+      color: white;
+      font-size: 24px;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+    }
+    .youtube-link a img {
+      width: 40px;
+      height: 40px;
+      margin-left: 10px;
+    }
+
+    /* Mahnılar */
+    .songs {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    .song {
+      background: #222;
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .song img {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+    }
+    .song-info {
+      flex: 1;
+    }
+    .song-info h4 { margin-bottom: 5px; color: white; font-size: 16px; }
+    .song-buttons button {
+      background: transparent;
+      border: 1px solid white;
+      color: white;
+      padding: 5px 10px;
+      margin-right: 5px;
+      cursor: pointer;
+      font-family: 'Anton', sans-serif;
+    }
+
+    /* Axtarış */
+    .search-bar {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+    }
+    .search-bar input {
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: none;
+      width: 200px;
+    }
+
+    /* Footer - qanunilik */
+    footer {
+      text-align: center;
+      margin-top: 50px;
+      font-size: 12px;
+      color: gray;
+    }
+
+  </style>
 </head>
 <body>
-  <background: url> assets/new-bg.jpg
-  <background: url>('assets/bg.jpg') no-repeat center center fixed;
-  <background-size> cover;
-    
-  
-  <header class="header">
-    <div class="wrap">
-      <div class="brand">
-        <h1>QAR6<span> Music Production</span></h1>
-        <p class="sub">Modern beats. Deep feelings. Share & download.</p>
-      </div>
-      <nav class="nav">
-        <a href="#tracks">Mahnılar</a>
-        <a href="#about">Haqqında</a>
-        <a href="#contact">Əlaqə</a>
-      </nav>
-    </div>
-  </header>
 
-  <main class="wrap main">
-    <section id="hero" class="hero card">
-      <div class="hero-left">
-        <h2>Yeni səslər, səninlə</h2>
-        <p>QAR6 Music Production — şəxsi mahnılarımı dinlə və yüklə. Yeni yayımlar üçün repo-ya bax.</p>
-        <div class="cta">
-          <a id="youtubeBtn" class="btn" href="https://youtube.com/yourchannel" target="_blank" rel="noopener">YouTube Kanalına keç</a>
+  <!-- Baş səhifə -->
+  <div class="section1">
+    <div class="language" onclick="toggleLanguage()">EN / RU</div>
+    <div class="hamburger" onclick="toggleMenu()"></div>
+    <div class="menu-panel" id="menuPanel">
+      <a href="#contact">Əlaqə</a>
+      <a href="#about">Haqqımızda</a>
+    </div>
+  </div>
+
+  <!-- İkinci bölmə -->
+  <div class="section2">
+    <div class="divider">
+      Yeni musiqilərimiz üçün YouTube kanalımıza abone olub videolarımızı bəyənməyi və şərh yazmağı unutmayın
+    </div>
+
+    <div class="youtube-link">
+      <a href="https://youtube.com/@qar6musicgroup?si=YMUzMQBJMvDhVrOC" target="_blank">
+        QAR6 MUSIC GROUP
+        <img src="youtube-icon.png" alt="YouTube">
+      </a>
+    </div>
+
+    <div class="search-bar">
+      <input type="text" id="search" placeholder="Mahnı axtar..." onkeyup="searchSongs()">
+    </div>
+
+    <div class="songs" id="songsList">
+      <!-- Mahnılar nümunəsi -->
+      <div class="song">
+        <img src="song1.jpg" alt="Mahnı 1">
+        <div class="song-info">
+          <h4>Mahnı Adı 1</h4>
+        </div>
+        <div class="song-buttons">
+          <button onclick="playSong('song1.mp3')">Dinlə</button>
+          <button onclick="downloadSong('song1.mp3')">Endir</button>
         </div>
       </div>
-      <div class="hero-right">
-        <img src="assets/cover-placeholder.png" alt="cover" class="cover">
+
+      <div class="song">
+        <img src="song2.jpg" alt="Mahnı 2">
+        <div class="song-info">
+          <h4>Mahnı Adı 2</h4>
+        </div>
+        <div class="song-buttons">
+          <button onclick="playSong('song2.mp3')">Dinlə</button>
+          <button onclick="downloadSong('song2.mp3')">Endir</button>
+        </div>
       </div>
-    </section>
-
-    <section id="tracks" class="card">
-      <h2>Mahnılar</h2>
-      <div id="tracksList" class="tracks-list">
-        <!-- tracks injected by script.js -->
-      </div>
-      <p class="hint">Yeni mahnı əlavə etmək üçün `audio/` qovluğuna faylı yükləyin və `songs.js` faylında obyekt əlavə edin.</p>
-    </section>
-
-    <section id="about" class="card">
-      <h2>Haqqında</h2>
-      <p>QAR6 Music Production — müasir, synth-led musiqi tərzi ilə işləyən prodüser brendi. Burada şəxsi mahnılarımı paylaşır, dinləyicilərlə birbaşa əlaqə qururam.</p>
-    </section>
-
-    <section id="contact" class="card">
-      <h2>Əlaqə</h2>
-      <p>Email: <a href="mailto:you@example.com">you@example.com</a></p>
-      <p>Repo: <a href="https://github.com/username/qar6-music-production" target="_blank" rel="noopener">GitHub repo</a></p>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <div class="wrap">
-      <p>© <span id="year"></span> QAR6 Music Production — All rights reserved.</p>
+      <!-- Daha çox mahnı əlavə oluna bilər -->
     </div>
+
+  </div>
+
+  <footer>
+    © 2025 QAR6 Music. Saytın bütün hüquqları qorunur.
   </footer>
 
-  <script src="songs.js"></script>
-  <script src="script.js"></script>
+  <script>
+    function toggleMenu() {
+      const panel = document.getElementById('menuPanel');
+      if(panel.style.left === '0px') {
+        panel.style.left = '-250px';
+      } else {
+        panel.style.left = '0px';
+      }
+    }
+
+    function toggleLanguage() {
+      alert('Dil dəyişmə funksiyası əlavə oluna bilər.');
+    }
+
+    function playSong(file) {
+      alert(file + " səsləndiriləcək.");
+    }
+
+    function downloadSong(file) {
+      alert(file + " endiriləcək.");
+    }
+
+    function searchSongs() {
+      const input = document.getElementById('search').value.toLowerCase();
+      const songs = document.querySelectorAll('.song');
+      songs.forEach(song => {
+        const name = song.querySelector('h4').innerText.toLowerCase();
+        song.style.display = name.includes(input) ? 'flex' : 'none';
+      });
+    }
+  </script>
+
 </body>
 </html>
