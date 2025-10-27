@@ -1,331 +1,215 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="az">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>QAR6 MUSIC GROUP</title>
-  <!-- Google Fonts -->
+  <meta name="description" content="Official website of QAR6 Music Group. Explore our latest songs and subscribe to our YouTube channel.">
+  <title>QAR6 Music Group</title>
+  <!-- Google Fonts: Anton and Alice -->
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Alice&display=swap" rel="stylesheet">
-  <!-- Font Awesome for YouTube icon -->
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <style>
-    /* Reset */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+    /* Custom CSS for specific styles */
     body {
+      margin: 0;
       font-family: 'Alice', serif;
-      color: white;
-      overflow-x: hidden;
+      color: #FFFFFF;
     }
-
-    /* Section 1 */
-    #section1 {
-      background-color: #800020; /* burgundy red */
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-      text-align: center;
+    .burgundy-bg {
+      background-color: #8B0000;
     }
-
-    /* Language Switcher */
-    .language-switch {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      display: flex;
-      gap: 10px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .language-switch span:hover {
-      text-decoration: underline;
-    }
-
-    /* Title */
-    .title {
+    .anton {
       font-family: 'Anton', sans-serif;
-      font-size: 64px;
-      margin-bottom: 40px;
     }
-
-    /* Hamburger Menu */
-    .hamburger {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      width: 30px;
-      height: 22px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      cursor: pointer;
+    .shadow-tl {
+      box-shadow: -5px -5px 10px rgba(0, 0, 0, 0.3);
     }
-
-    .hamburger div {
-      height: 4px;
-      background-color: white;
-      border-radius: 2px;
-      transition: all 0.3s ease;
-    }
-
-    /* Panel */
     .menu-panel {
-      position: fixed;
-      top: 0;
-      left: -300px;
-      width: 300px;
-      height: 100%;
-      background-color: black;
-      padding: 50px 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      transition: 0.3s;
-      z-index: 10;
+      transform: translateX(-100%);
+      transition: transform 0.3s ease-in-out;
     }
-
-    .menu-panel.active {
-      left: 0;
+    .menu-panel.open {
+      transform: translateX(0);
     }
-
-    .menu-panel button {
-      background: none;
-      border: none;
-      color: white;
-      font-family: 'Alice', serif;
-      font-size: 18px;
-      text-align: left;
-      cursor: pointer;
+    .song-card img {
+      transition: transform 0.3s ease;
     }
-
-    .categories {
-      margin-left: 15px;
-      display: none;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .categories button {
-      font-size: 16px;
-      color: white;
-    }
-
-    /* Section 2 */
-    #section2 {
-      background-color: black;
-      padding: 50px 20px;
-      position: relative;
-    }
-
-    hr {
-      border: 0;
-      border-top: 1px solid white;
-      margin-bottom: 20px;
-    }
-
-    .youtube-section {
-      text-align: center;
-      margin-bottom: 40px;
-    }
-
-    .youtube-section a {
-      color: white;
-      font-size: 40px;
-      margin-top: 10px;
-      display: inline-block;
-      transition: transform 0.3s;
-    }
-
-    .youtube-section a:hover {
-      transform: scale(1.2);
-    }
-
-    .songs-list {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    .song-item {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      background: #111;
-      padding: 15px;
-      border-radius: 8px;
-    }
-
-    .song-item img {
-      width: 60px;
-      height: 60px;
-      object-fit: cover;
-      border-radius: 5px;
-    }
-
-    .song-details {
-      flex: 1;
-    }
-
-    .song-details h3 {
-      font-family: 'Alice', serif;
-      font-size: 18px;
-      margin-bottom: 5px;
-    }
-
-    .song-buttons button {
-      margin-right: 10px;
-      padding: 5px 10px;
-      font-family: 'Alice', serif;
-      background: none;
-      border: 1px solid white;
-      color: white;
-      cursor: pointer;
-      border-radius: 4px;
-      transition: 0.3s;
-    }
-
-    .song-buttons button:hover {
-      background: white;
-      color: black;
-    }
-
-    /* Search Button */
-    .search-button {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      background: none;
-      border: 2px solid white;
-      padding: 10px 15px;
-      font-size: 16px;
-      cursor: pointer;
-      border-radius: 5px;
-    }
-
-    /* Footer */
-    footer {
-      text-align: center;
-      margin-top: 50px;
-      font-size: 14px;
-      color: #aaa;
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      .title {
-        font-size: 48px;
-      }
-      .menu-panel {
-        width: 80%;
-      }
-      .song-item {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .song-buttons {
-        margin-top: 10px;
-      }
+    .song-card img:hover {
+      transform: scale(1.05);
     }
   </style>
 </head>
-<body>
-
-  <!-- Section 1 -->
-  <section id="section1">
-    <div class="language-switch">
-      <span>EN</span> | <span>RU</span>
+<body class="bg-black">
+  <!-- Section 1: Header -->
+  <section class="burgundy-bg min-h-screen flex flex-col justify-center items-center relative">
+    <!-- Language Switcher -->
+    <div class="absolute top-4 right-4">
+      <select id="language-switcher" class="bg-transparent text-white border border-white rounded p-1 focus:outline-none">
+        <option value="az">Azərbaycan</option>
+        <option value="en">English</option>
+        <option value="ru">Русский</option>
+      </select>
     </div>
-
-    <div class="title">QAR6 MUSIC GROUP</div>
-
-    <div class="hamburger" id="hamburger">
-      <div></div>
-      <div></div>
-      <div></div>
+    <!-- Menu Button -->
+    <button id="menu-btn" class="absolute top-4 left-4 text-white text-2xl shadow-tl p-2">
+      <i class="fas fa-bars"></i>
+    </button>
+    <!-- Menu Panel -->
+    <div id="menu-panel" class="menu-panel fixed top-0 left-0 h-full w-64 bg-black p-4">
+      <button id="close-menu" class="text-white text-xl mb-4"><i class="fas fa-times"></i></button>
+      <ul class="space-y-4 text-white text-center">
+        <li>
+          <button id="songs-menu" class="text-lg hover:underline">Mahnılar</button>
+          <ul id="songs-submenu" class="hidden space-y-2 mt-2 text-base">
+            <li><a href="#love" class="hover:text-gray-300">Sevgi</a></li>
+            <li><a href="#general" class="hover:text-gray-300">Ümumi</a></li>
+            <li><a href="#other" class="hover:text-gray-300">Başqa</a></li>
+          </ul>
+        </li>
+        <li><a href="#about" class="text-lg hover:underline">Haqqımızda</a></li>
+      </ul>
     </div>
+    <!-- Main Title -->
+    <h1 class="anton text-6xl md:text-8xl text-white text-center">QAR6 MUSIC GROUP</h1>
+  </section>
 
-    <div class="menu-panel" id="menuPanel">
-      <button id="songsBtn">Songs</button>
-      <div class="categories" id="songsCategories">
-        <button>Love</button>
-        <button>General</button>
-        <button>In Other Languages</button>
+  <!-- Divider -->
+  <hr class="border-t-2 border-white my-8">
+
+  <!-- Section 2: Content -->
+  <section class="bg-black py-12">
+    <!-- Search Button -->
+    <div class="container mx-auto px-4">
+      <button id="search-btn" class="absolute top-4 left-4 text-white text-2xl">
+        <i class="fas fa-search"></i>
+      </button>
+      <div id="search-bar" class="hidden mt-12 mb-8">
+        <input type="text" id="search-input" placeholder="Mahnıları axtar..." class="w-full max-w-md bg-black border border-white text-white p-2 rounded">
       </div>
-      <button>About Us</button>
+      <!-- CTA Text -->
+      <p id="cta-text" class="text-center text-xl md:text-2xl mb-4">Yeni musiqilərimiz üçün YouTube kanalımıza abunə olub videolarımızı bəyənməyi və şərh yazmağı unutmayın!</p>
+      <!-- YouTube Icon -->
+      <div class="text-center mb-8">
+        <a href="https://youtube.com/@qar6musicgroup?si=YMUzMQBJMvDhVrOC" target="_blank">
+          <i class="fab fa-youtube text-4xl text-white hover:text-red-600"></i>
+        </a>
+      </div>
+      <!-- Song List -->
+      <div id="song-list" class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Example Song Card -->
+        <div class="song-card flex items-center space-x-4">
+          <img src="https://via.placeholder.com/150" alt="Song Thumbnail" class="w-24 h-24 object-cover rounded">
+          <div>
+            <h3 class="text-lg">Mahnı Adı</h3>
+            <div class="space-x-2">
+              <button class="bg-white text-black px-4 py-1 rounded hover:bg-gray-300">Dinlə</button>
+              <button class="bg-white text-black px-4 py-1 rounded hover:bg-gray-300">Endir</button>
+            </div>
+          </div>
+        </div>
+        <!-- Add more song cards dynamically via JavaScript -->
+      </div>
     </div>
   </section>
 
-  <!-- Section 2 -->
-  <section id="section2">
-    <hr>
-    <div class="youtube-section">
-      <p>For our new songs, subscribe to our YouTube channel, like our videos, and leave a comment.</p>
-      <a href="https://youtube.com/@qar6musicgroup?si=YMUzMQBJMvDhVrOC" target="_blank"><i class="fab fa-youtube"></i></a>
-    </div>
+  <!-- Footer -->
+  <footer class="bg-black py-4 text-center text-white text-sm">
+    <p>Bu sayt və onun məzmunu qanuni olaraq qorunur. Bütün hüquqlar qorunur.</p>
+    <p>© 2025 QAR6 Music Group</p>
+  </footer>
 
-    <button class="search-button">Search</button>
-
-    <div class="songs-list">
-      <div class="song-item">
-        <img src="https://via.placeholder.com/60" alt="Song Image">
-        <div class="song-details">
-          <h3>Song Title 1</h3>
-        </div>
-        <div class="song-buttons">
-          <button>Listen</button>
-          <button>Download</button>
-        </div>
-      </div>
-      <div class="song-item">
-        <img src="https://via.placeholder.com/60" alt="Song Image">
-        <div class="song-details">
-          <h3>Song Title 2</h3>
-        </div>
-        <div class="song-buttons">
-          <button>Listen</button>
-          <button>Download</button>
-        </div>
-      </div>
-      <div class="song-item">
-        <img src="https://via.placeholder.com/60" alt="Song Image">
-        <div class="song-details">
-          <h3>Song Title 3</h3>
-        </div>
-        <div class="song-buttons">
-          <button>Listen</button>
-          <button>Download</button>
-        </div>
-      </div>
-      <!-- Add more songs here -->
-    </div>
-
-    <footer>
-      © 2025 QAR6 MUSIC GROUP. All rights reserved. Legal protection applies.
-    </footer>
-  </section>
-
+  <!-- JavaScript for Interactivity -->
   <script>
-    const hamburger = document.getElementById('hamburger');
-    const menuPanel = document.getElementById('menuPanel');
-    const songsBtn = document.getElementById('songsBtn');
-    const songsCategories = document.getElementById('songsCategories');
+    // Menu Toggle
+    const menuBtn = document.getElementById('menu-btn');
+    const menuPanel = document.getElementById('menu-panel');
+    const closeMenu = document.getElementById('close-menu');
+    const songsMenu = document.getElementById('songs-menu');
+    const songsSubmenu = document.getElementById('songs-submenu');
 
-    hamburger.addEventListener('click', () => {
-      menuPanel.classList.toggle('active');
+    menuBtn.addEventListener('click', () => {
+      menuPanel.classList.toggle('open');
     });
 
-    songsBtn.addEventListener('click', () => {
-      songsCategories.style.display = songsCategories.style.display === 'flex' ? 'none' : 'flex';
+    closeMenu.addEventListener('click', () => {
+      menuPanel.classList.remove('open');
+    });
+
+    songsMenu.addEventListener('click', () => {
+      songsSubmenu.classList.toggle('hidden');
+    });
+
+    // Search Functionality
+    const searchBtn = document.getElementById('search-btn');
+    const searchBar = document.getElementById('search-bar');
+    const searchInput = document.getElementById('search-input');
+
+    searchBtn.addEventListener('click', () => {
+      searchBar.classList.toggle('hidden');
+      searchInput.focus();
+    });
+
+    searchInput.addEventListener('input', () => {
+      const query = searchInput.value.toLowerCase();
+      const songCards = document.querySelectorAll('.song-card');
+      songCards.forEach(card => {
+        const title = card.querySelector('h3').textContent.toLowerCase();
+        card.style.display = title.includes(query) ? 'flex' : 'none';
+      });
+    });
+
+    // Language Switcher
+    const languageSwitcher = document.getElementById('language-switcher');
+    const translations = {
+      az: {
+        cta: "Yeni musiqilərimiz üçün YouTube kanalımıza abunə olub videolarımızı bəyənməyi və şərh yazmağı unutmayın!",
+        songs: "Mahnılar",
+        about: "Haqqımızda",
+        love: "Sevgi",
+        general: "Ümumi",
+        other: "Başqa",
+        search: "Mahnıları axtar...",
+        listen: "Dinlə",
+        download: "Endir"
+      },
+      en: {
+        cta: "Subscribe to our YouTube channel for our latest music, don't forget to like and comment!",
+        songs: "Songs",
+        about: "About Us",
+        love: "Love",
+        general: "General",
+        other: "Other",
+        search: "Search songs...",
+        listen: "Listen",
+        download: "Download"
+      },
+      ru: {
+        cta: "Подпишитесь на наш YouTube-канал для новых песен, не забудьте поставить лайк и оставить комментарий!",
+        songs: "Песни",
+        about: "О нас",
+        love: "Любовь",
+        general: "Общее",
+        other: "Другое",
+        search: "Поиск песен...",
+        listen: "Слушать",
+        download: "Скачать"
+      }
+    };
+
+    languageSwitcher.addEventListener('change', (e) => {
+      const lang = e.target.value;
+      document.getElementById('cta-text').textContent = translations[lang].cta;
+      document.getElementById('songs-menu').textContent = translations[lang].songs;
+      document.querySelector('#songs-submenu li:nth-child(1) a').textContent = translations[lang].love;
+      document.querySelector('#songs-submenu li:nth-child(2) a').textContent = translations[lang].general;
+      document.querySelector('#songs-submenu li:nth-child(3) a').textContent = translations[lang].other;
+      document.querySelector('#search-input').placeholder = translations[lang].search;
+      document.querySelectorAll('.song-card button:nth-child(1)').forEach(btn => btn.textContent = translations[lang].listen);
+      document.querySelectorAll('.song-card button:nth-child(2)').forEach(btn => btn.textContent = translations[lang].download);
     });
   </script>
-
 </body>
 </html>
