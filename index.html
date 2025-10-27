@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Official website of QAR6 Music Group. Explore our latest songs and subscribe to our YouTube channel.">
+  <meta name="description" content="Official website of QAR6 Music Group. Discover our latest songs and subscribe to our YouTube channel.">
   <title>QAR6 Music Group</title>
   <!-- Google Fonts: Anton and Alice -->
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Alice&display=swap" rel="stylesheet">
@@ -80,10 +80,10 @@
   <hr class="border-t-2 border-white my-8">
 
   <!-- Section 2: Content -->
-  <section class="bg-black py-12">
-    <!-- Search Button -->
+  <section class="bg-black py-12 relative">
     <div class="container mx-auto px-4">
-      <button id="search-btn" class="absolute top-4 left-4 text-white text-2xl">
+      <!-- Search Button -->
+      <button id="search-btn" class="absolute top-4 left-4 text-white text-3xl">
         <i class="fas fa-search"></i>
       </button>
       <div id="search-bar" class="hidden mt-12 mb-8">
@@ -98,10 +98,10 @@
         </a>
       </div>
       <!-- Song List -->
-      <div id="song-list" class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div id="song-list" class="container mx-auto flex flex-col gap-8">
         <!-- Example Song Card -->
         <div class="song-card flex items-center space-x-4">
-          <img src="https://via.placeholder.com/150" alt="Song Thumbnail" class="w-24 h-24 object-cover rounded">
+          <img src="https://via.placeholder.com/100" alt="Song Thumbnail" class="w-24 h-24 object-cover rounded">
           <div>
             <h3 class="text-lg">Mahnı Adı</h3>
             <div class="space-x-2">
@@ -117,7 +117,7 @@
 
   <!-- Footer -->
   <footer class="bg-black py-4 text-center text-white text-sm">
-    <p>Bu sayt və onun məzmunu qanuni olaraq qorunur. Bütün hüquqlar qorunur.</p>
+    <p>This website and its content are legally protected. All rights reserved.</p>
     <p>© 2025 QAR6 Music Group</p>
   </footer>
 
@@ -173,10 +173,11 @@
         other: "Başqa",
         search: "Mahnıları axtar...",
         listen: "Dinlə",
-        download: "Endir"
+        download: "Endir",
+        footer: "Bu sayt və onun məzmunu qanuni olaraq qorunur. Bütün hüquqlar qorunur."
       },
       en: {
-        cta: "Subscribe to our YouTube channel for our latest music, don't forget to like and comment!",
+        cta: "For our new songs, subscribe to our YouTube channel, like our videos, and leave a comment!",
         songs: "Songs",
         about: "About Us",
         love: "Love",
@@ -184,7 +185,8 @@
         other: "Other",
         search: "Search songs...",
         listen: "Listen",
-        download: "Download"
+        download: "Download",
+        footer: "This website and its content are legally protected. All rights reserved."
       },
       ru: {
         cta: "Подпишитесь на наш YouTube-канал для новых песен, не забудьте поставить лайк и оставить комментарий!",
@@ -195,7 +197,8 @@
         other: "Другое",
         search: "Поиск песен...",
         listen: "Слушать",
-        download: "Скачать"
+        download: "Скачать",
+        footer: "Этот сайт и его содержимое защищены законом. Все права защищены."
       }
     };
 
@@ -209,6 +212,7 @@
       document.querySelector('#search-input').placeholder = translations[lang].search;
       document.querySelectorAll('.song-card button:nth-child(1)').forEach(btn => btn.textContent = translations[lang].listen);
       document.querySelectorAll('.song-card button:nth-child(2)').forEach(btn => btn.textContent = translations[lang].download);
+      document.querySelector('footer p:first-child').textContent = translations[lang].footer;
     });
   </script>
 </body>
